@@ -12,7 +12,5 @@ export const serialize = (node: NodeItem) => {
 
 export const deserialize = (node: string) => {
   const root = JSON.parse(node);
-  console.log(root);
-
   return new NodeItem(root.val, root.left, root.right);
 };
