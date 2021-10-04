@@ -1,18 +1,23 @@
-/* Good morning! Here's your coding interview problem for today.
+import { deserialize, NodeItem, serialize } from ".";
 
-This problem was asked by Google.
+it("should serialize", () => {
+  const node = new NodeItem(
+    "root",
+    new NodeItem("left", new NodeItem("left.left")),
+    new NodeItem("right")
+  );
 
-Given the root to a binary tree, implement serialize(root), which serializes the tree into a string, and deserialize(s), which deserializes the string back into the tree.
+  const serializedNode = serialize(node);
+  expect(serializedNode).toBe(
+    '{"val":"root","left":{"val":"left","left":{"val":"left.left"}},"right":{"val":"right"}}'
+  );
+});
 
-For example, given the following Node class
+it("should deserialize", () => {
+  const node =
+    '{"val":"root","left":{"val":"left","left":{"val":"left.left"}},"right":{"val":"right"}}';
 
-class Node:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-The following test should pass:
+  const deserializedNode = deserialize(node);
 
-node = Node('root', Node('left', Node('left.left')), Node('right'))
-assert deserialize(serialize(node)).left.left.val == 'left.left'
- */
+  expect(deserializedNode);
+});
